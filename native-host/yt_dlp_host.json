@@ -1,0 +1,7 @@
+{
+  "name": "yt_dlp_host",
+  "description": "Native messaging host for yt-dlp downloads",
+  "path": "C:\\Users\\benwa\\yt-dlp-extension\\native-host\\host.bat",
+  "type": "stdio",
+  "allowed_extensions": ["yt-dlp-dl@local"]
+}

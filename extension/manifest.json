@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "yt-dlp Downloader",
+  "version": "1.0",
+  "description": "Download YouTube videos using yt-dlp",
+  "permissions": [
+    "nativeMessaging",
+    "activeTab"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "yt-dlp-dl@local",
+      "strict_min_version": "55.0"
+    }
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.youtube.com/watch*"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ]
+}

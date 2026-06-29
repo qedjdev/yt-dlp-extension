@@ -1,0 +1,88 @@
+#ytdlp-download-btn {
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 18px;
+  padding: 8px 16px 8px 12px;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 8px;
+  transition: background 0.2s;
+}
+
+.ytdlp-icon {
+  width: 20px;
+  height: 20px;
+}
+
+#ytdlp-download-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+#ytdlp-panel {
+  position: absolute;
+  background: #212121;
+  border-radius: 12px;
+  padding: 16px;
+  z-index: 99999;
+  min-width: 260px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.ytdlp-panel-title {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.ytdlp-formats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ytdlp-fmt-btn {
+  background: #383838;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.ytdlp-fmt-btn:hover:not(:disabled) {
+  background: #4a4a4a;
+}
+
+.ytdlp-fmt-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.ytdlp-status {
+  margin-top: 10px;
+  font-size: 12px;
+  min-height: 18px;
+  word-break: break-word;
+}
+
+.ytdlp-status-info {
+  color: #aaa;
+}
+
+.ytdlp-status-success {
+  color: #4caf50;
+}
+
+.ytdlp-status-error {
+  color: #f44336;
+}

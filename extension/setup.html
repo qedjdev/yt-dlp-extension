@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>yt-dlp Extension Setup</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Roboto", "Segoe UI", Arial, sans-serif;
+      background: #0f0f0f;
+      color: #e8e8e8;
+      display: flex;
+      justify-content: center;
+      padding: 48px 24px;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 640px;
+      width: 100%;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #aaa;
+      margin-bottom: 32px;
+    }
+    .step {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .step-number {
+      background: #cc0000;
+      color: white;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .step-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .step-body {
+      margin-left: 40px;
+      color: #bbb;
+      font-size: 14px;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #cc0000;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-top: 12px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: #aa0000; }
+    code {
+      background: #2a2a2a;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: "Consolas", "Courier New", monospace;
+      font-size: 13px;
+      color: #e0e0e0;
+    }
+    .os-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+    .os-tab {
+      background: #2a2a2a;
+      color: #aaa;
+      border: none;
+      border-radius: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .os-tab.active {
+      background: #cc0000;
+      color: white;
+    }
+    .os-content { display: none; }
+    .os-content.active { display: block; }
+    .status-bar {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 16px 24px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #666;
+    }
+    .status-dot.connected { background: #4caf50; }
+    .status-dot.error { background: #f44336; }
+    .status-text { font-size: 14px; color: #aaa; }
+    .faq { margin-top: 40px; }
+    .faq h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+    .faq-item {
+      background: #1a1a1a;
+      border-radius: 12px;
+      margin-bottom: 8px;
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #e8e8e8;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 500;
+      text-align: left;
+      padding: 16px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .faq-question:hover { background: rgba(255, 255, 255, 0.05); }
+    .faq-arrow {
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      color: #888;
+      font-size: 12px;
+    }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .faq-answer-inner {
+      padding: 0 24px 16px;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .faq-answer-inner p { margin-bottom: 10px; }
+    .faq-answer-inner p:last-child { margin-bottom: 0; }
+    .faq-answer-inner a { color: #6eaaf5; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>yt-dlp Extension Setup</h1>
+    <p class="subtitle">A small helper app is needed to run yt-dlp on your computer.</p>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">1</div>
+        <div class="step-title">Download the native host installer</div>
+      </div>
+      <div class="step-body">
+        <div class="os-tabs">
+          <button class="os-tab active" data-os="windows">Windows</button>
+          <button class="os-tab" data-os="macos">macOS</button>
+          <button class="os-tab" data-os="linux">Linux</button>
+        </div>
+        <div class="os-content active" data-os="windows">
+          <p>Download and run the installer:</p>
+          <a class="download-btn" id="download-windows" href="https://github.com/user/yt-dlp-extension/releases/latest/download/yt-dlp-host-windows.exe">
+            Download for Windows
+          </a>
+        </div>
+        <div class="os-content" data-os="macos">
+          <p>Run this in Terminal:</p>
+          <p><code>curl -fsSL https://raw.githubusercontent.com/user/yt-dlp-extension/main/install.sh | bash</code></p>
+        </div>
+        <div class="os-content" data-os="linux">
+          <p>Run this in your terminal:</p>
+          <p><code>curl -fsSL https://raw.githubusercontent.com/user/yt-dlp-extension/main/install.sh | bash</code></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">2</div>
+        <div class="step-title">Restart Firefox</div>
+      </div>
+      <div class="step-body">
+        <p>Close and reopen Firefox so it detects the native host.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-header">
+        <div class="step-number">3</div>
+        <div class="step-title">Go to a YouTube video</div>
+      </div>
+      <div class="step-body">
+        <p>You'll see a <strong>Download</strong> button next to Share. Click it to pick a quality and start downloading.</p>
+        <p>yt-dlp and ffmpeg will be downloaded automatically on first use.</p>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-dot" id="status-dot"></div>
+      <span class="status-text" id="status-text">Checking connection...</span>
+    </div>
+
+    <div class="faq">
+      <h2>FAQ</h2>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Why do I need to download something?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Browser extensions run in a sandbox and can't execute programs on your computer. To actually download videos, the extension needs a small helper app (called a "native messaging host") that runs yt-dlp on your behalf.</p>
+            <p>This is the same approach used by password managers like Bitwarden and KeePassXC, and by other download tools like Video DownloadHelper. It's a standard, well-supported feature of Firefox's extension system.</p>
+            <p>The helper app is lightweight and runs only when you click Download. It doesn't run in the background or start with your computer.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is downloading it safe?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p>Yes. The entire project is open source &mdash; you can inspect every line of code yourself. The helper app does exactly two things: it downloads yt-dlp and ffmpeg from their official GitHub releases, and it runs yt-dlp when you ask it to download a video.</p>
+            <p>It doesn't collect any data, doesn't phone home, and doesn't install anything outside its own application folder.</p>
+            <p>If you don't trust the pre-built executable, you can build it yourself from the source code. The instructions are in the project's GitHub repository.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Is this illegal? Does it break YouTube's Terms of Service?
+          <span class="faq-arrow">&#9660;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <p><strong>The tool itself is legal.</strong> In 2020, the RIAA tried to take down youtube-dl (the project yt-dlp is based on) using a DMCA claim. The Electronic Frontier Foundation successfully argued that the tool doesn't circumvent any digital protections &mdash; it accesses video the same way a browser does. GitHub reinstated the project and created a $1M developer defense fund in response.</p>
+            <p><strong>It does violate YouTube's Terms of Service.</strong> YouTube's ToS say you may not access content through means other than the video player itself, unless YouTube explicitly provides a download option (like YouTube Premium). However, violating Terms of Service is a breach of contract between you and YouTube &mdash; it is not a criminal offense. The realistic consequence is that YouTube could terminate your account, though enforcement against individual users is extremely rare.</p>
+            <p><strong>What you download matters.</strong> Downloading copyrighted content you don't have permission to use is copyright infringement regardless of which tool you use. Downloading Creative Commons-licensed content, your own uploads, or content where you have the creator's permission is fine.</p>
+            <p>This extension is a neutral tool. How you use it is your responsibility.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="setup.js"></script>
+</body>
+</html>
