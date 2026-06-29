@@ -3,7 +3,7 @@ set -e
 
 APP_NAME="yt-dlp-extension"
 HOST_NAME="yt_dlp_host"
-EXTENSION_ID="yt-dlp-dl@local"
+EXTENSION_ID="yt-dlp-dl@wakefield.fyi"
 
 case "$(uname -s)" in
     Darwin)

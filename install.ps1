@@ -23,7 +23,7 @@ $manifest = @{
     description = "Native messaging host for yt-dlp downloads"
     path = "$installDir\host.exe"
     type = "stdio"
-    allowed_extensions = @("yt-dlp-dl@local")
+    allowed_extensions = @("yt-dlp-dl@wakefield.fyi")
 } | ConvertTo-Json
 
 $manifestPath = "$installDir\$hostName.json"

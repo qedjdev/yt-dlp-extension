@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "yt-dlp Downloader",
-  "version": "1.0",
+  "version": "0.6",
   "description": "Download YouTube videos using yt-dlp",
   "permissions": [
     "nativeMessaging",
@@ -9,8 +9,15 @@
   ],
   "browser_specific_settings": {
     "gecko": {
-      "id": "yt-dlp-dl@local",
-      "strict_min_version": "55.0"
+      "id": "yt-dlp-dl@wakefield.fyi",
+      "strict_min_version": "55.0",
+      "data_collection_permissions": {
+        "required": ["none"],
+        "optional": ["none"],
+        "disclosure": {
+          "en": "This extension does not collect or transmit any personal data. It sends only the YouTube video URL and your selected format to a locally installed native application (yt-dlp) on your computer."
+        }
+      }
     }
   },
   "icons": {
