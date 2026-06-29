@@ -28,7 +28,7 @@ The extension needs a small helper app to run yt-dlp on your computer. When you 
 
 **Windows:**
 
-Download and run the installer from the [latest release](https://github.com/user/yt-dlp-extension/releases/latest), or run the PowerShell installer:
+Download and run the installer from the [latest release](https://github.com/qedjdev/yt-dlp-extension/releases/latest), or run the PowerShell installer:
 
 ```powershell
 .\install.ps1

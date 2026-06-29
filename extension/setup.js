@@ -1,5 +1,3 @@
-const HOST_NAME = "yt_dlp_host";
-
 document.querySelectorAll(".os-tab").forEach((tab) => {
   tab.addEventListener("click", () => {
     document.querySelectorAll(".os-tab").forEach((t) => t.classList.remove("active"));
@@ -8,35 +6,6 @@ document.querySelectorAll(".os-tab").forEach((tab) => {
     document.querySelectorAll(`.os-content[data-os="${tab.dataset.os}"]`).forEach((c) => c.classList.add("active"));
   });
 });
-
-function checkConnection() {
-  const dot = document.getElementById("status-dot");
-  const text = document.getElementById("status-text");
-
-  try {
-    const port = browser.runtime.connectNative(HOST_NAME);
-
-    port.onMessage.addListener((response) => {
-      if (response.type === "status") {
-        dot.className = "status-dot connected";
-        text.textContent = "Connected! Native host is working. You can close this tab.";
-        port.disconnect();
-      }
-    });
-
-    port.onDisconnect.addListener(() => {
-      if (port.error) {
-        dot.className = "status-dot error";
-        text.textContent = "Not connected — install the native host and restart Firefox.";
-      }
-    });
-
-    port.postMessage({ action: "status" });
-  } catch (e) {
-    dot.className = "status-dot error";
-    text.textContent = "Not connected — install the native host and restart Firefox.";
-  }
-}
 
 // FAQ expand/collapse
 document.querySelectorAll(".faq-question").forEach((btn) => {
@@ -66,5 +35,3 @@ document.querySelectorAll(".os-content").forEach((c) => c.classList.remove("acti
 document.querySelector(`.os-tab[data-os="${detectedOS}"]`).classList.add("active");
 document.querySelectorAll(`.os-content[data-os="${detectedOS}"]`).forEach((c) => c.classList.add("active"));
 
-checkConnection();
-setInterval(checkConnection, 5000);

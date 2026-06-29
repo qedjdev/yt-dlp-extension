@@ -107,24 +107,6 @@
     }
     .os-content { display: none; }
     .os-content.active { display: block; }
-    .status-bar {
-      background: #1a1a1a;
-      border-radius: 12px;
-      padding: 16px 24px;
-      margin-top: 24px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .status-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #666;
-    }
-    .status-dot.connected { background: #4caf50; }
-    .status-dot.error { background: #f44336; }
-    .status-text { font-size: 14px; color: #aaa; }
     .faq { margin-top: 40px; }
     .faq h2 {
       font-size: 20px;
@@ -195,7 +177,7 @@
         </div>
         <div class="os-content active" data-os="windows">
           <p>Download and run the installer:</p>
-          <a class="download-btn" id="download-windows" href="https://github.com/user/yt-dlp-extension/releases/latest/download/yt-dlp-host-windows.exe">
+          <a class="download-btn" id="download-windows" href="https://github.com/qedjdev/yt-dlp-extension/releases/latest/download/yt-dlp-host-windows.exe">
             Download for Windows
           </a>
         </div>
@@ -229,11 +211,6 @@
         <p>You'll see a <strong>Download</strong> button next to Share. Click it to pick a quality and start downloading.</p>
         <p>yt-dlp and ffmpeg will be downloaded automatically on first use.</p>
       </div>
-    </div>
-
-    <div class="status-bar">
-      <div class="status-dot" id="status-dot"></div>
-      <span class="status-text" id="status-text">Checking connection...</span>
     </div>
 
     <div class="faq">
