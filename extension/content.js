@@ -38,6 +38,8 @@ function onButtonClick() {
   browser.runtime.sendMessage({ action: "check" }).then((response) => {
     if (response && response.connected) {
       showPanel();
+    } else {
+      window.open("https://yt.wakefield.fyi/setup.html", "_blank");
     }
   });
 }

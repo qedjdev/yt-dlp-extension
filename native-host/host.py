@@ -290,5 +290,83 @@ def main():
                 send_message({"type": "error", "error": str(e)})
 
 
+HOST_NAME = "yt_dlp_host"
+EXTENSION_ID = "yt-dlp-dl@local"
+
+
+def is_interactive():
+    if sys.platform == "win32":
+        return sys.stdin is None or not hasattr(sys.stdin, "buffer") or sys.stdin.isatty()
+    return sys.stdin.isatty()
+
+
+def install():
+    system = platform.system()
+    exe_path = os.path.abspath(sys.argv[0])
+    install_dir = get_app_data_dir()
+    os.makedirs(install_dir, exist_ok=True)
+
+    if system == "Windows":
+        dest = os.path.join(install_dir, "host.exe")
+    else:
+        dest = os.path.join(install_dir, "host")
+
+    if os.path.abspath(exe_path) != os.path.abspath(dest):
+        shutil.copy2(exe_path, dest)
+        if system != "Windows":
+            os.chmod(dest, os.stat(dest).st_mode | stat.S_IEXEC)
+
+    manifest = {
+        "name": HOST_NAME,
+        "description": "Native messaging host for yt-dlp downloads",
+        "path": dest,
+        "type": "stdio",
+        "allowed_extensions": [EXTENSION_ID],
+    }
+
+    if system == "Windows":
+        manifest_path = os.path.join(install_dir, f"{HOST_NAME}.json")
+        with open(manifest_path, "w") as f:
+            json.dump(manifest, f, indent=2)
+
+        import winreg
+        key_path = f"SOFTWARE\\Mozilla\\NativeMessagingHosts\\{HOST_NAME}"
+        with winreg.CreateKey(winreg.HKEY_CURRENT_USER, key_path) as key:
+            winreg.SetValueEx(key, "", 0, winreg.REG_SZ, manifest_path)
+
+        print("yt-dlp Extension - Native Host Installer")
+        print("=" * 40)
+        print(f"Installed to: {dest}")
+        print(f"Registry key: HKCU\\{key_path}")
+        print()
+        print("Installation complete!")
+        print("Restart Firefox for changes to take effect.")
+        print()
+        input("Press Enter to close...")
+
+    elif system == "Darwin":
+        manifest_dir = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "Mozilla", "NativeMessagingHosts")
+        os.makedirs(manifest_dir, exist_ok=True)
+        manifest_path = os.path.join(manifest_dir, f"{HOST_NAME}.json")
+        with open(manifest_path, "w") as f:
+            json.dump(manifest, f, indent=2)
+        print(f"Installed to: {dest}")
+        print(f"Manifest: {manifest_path}")
+        print("\nInstallation complete! Restart Firefox.")
+
+    else:
+        manifest_dir = os.path.join(os.path.expanduser("~"), ".mozilla", "native-messaging-hosts")
+        os.makedirs(manifest_dir, exist_ok=True)
+        manifest_path = os.path.join(manifest_dir, f"{HOST_NAME}.json")
+        with open(manifest_path, "w") as f:
+            json.dump(manifest, f, indent=2)
+        print(f"Installed to: {dest}")
+        print(f"Manifest: {manifest_path}")
+        print("\nInstallation complete! Restart Firefox.")
+
+
 if __name__ == "__main__":
-    main()
+    if is_interactive():
+        install()
+    else:
+        main()

@@ -14,14 +14,11 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact: yt-dlp-host-windows.exe
-            pyinstaller_name: host.exe
+            name: yt-dlp-host-windows
           - os: macos-latest
-            artifact: yt-dlp-host-macos
-            pyinstaller_name: host
+            name: yt-dlp-host-macos
           - os: ubuntu-latest
-            artifact: yt-dlp-host-linux
-            pyinstaller_name: host
+            name: yt-dlp-host-linux
 
     runs-on: ${{ matrix.os }}
 
@@ -36,13 +33,9 @@ jobs:
         run: pip install pyinstaller
 
       - name: Build
-        run: python build.py
-
-      - name: Rename artifact
-        shell: bash
-        run: mv "dist/${{ matrix.pyinstaller_name }}" "dist/${{ matrix.artifact }}"
+        run: python build_ci.py ${{ matrix.name }}
 
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/${{ matrix.artifact }}
+          files: dist/*

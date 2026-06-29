@@ -72,5 +72,5 @@ function notifyTab(tabId, message) {
 }
 
 function openSetupPage() {
-  browser.tabs.create({ url: browser.runtime.getURL("setup.html") });
+  browser.tabs.create({ url: "https://yt.wakefield.fyi/setup.html" });
 }
