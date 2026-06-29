@@ -134,7 +134,9 @@ browser.runtime.onMessage.addListener((message) => {
 });
 
 function init() {
-  createDownloadButton();
+  if (location.href.includes("/watch")) {
+    createDownloadButton();
+  }
 }
 
 if (document.readyState === "loading") {
@@ -147,8 +149,25 @@ let lastUrl = location.href;
 new MutationObserver(() => {
   if (location.href !== lastUrl) {
     lastUrl = location.href;
+    button = null;
+    if (panel && panel.parentNode) {
+      panel.remove();
+      panel = null;
+    }
     if (location.href.includes("/watch")) {
-      setTimeout(init, 1000);
+      waitForButtonBar();
     }
   }
 }).observe(document.body, { childList: true, subtree: true });
+
+function waitForButtonBar() {
+  const observer = new MutationObserver(() => {
+    const target = document.querySelector("#above-the-fold #top-level-buttons-computed");
+    if (target && !document.getElementById("ytdlp-download-btn")) {
+      observer.disconnect();
+      createDownloadButton();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+  setTimeout(() => observer.disconnect(), 10000);
+}
